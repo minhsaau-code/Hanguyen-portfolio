@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap');
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #151515;
+  --color-text-primary: #f5f5f5;
+  --color-muted: #808080;
+  --color-stroke: rgba(255, 255, 255, 0.1);
+  --color-accent: #f5f5f5;
+
+  --font-body: "Inter", sans-serif;
+  --font-display: "Instrument Serif", serif;
+
+  @keyframes scroll-down {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(200%); opacity: 0; }
+  }
+
+  @keyframes role-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@utility accent-gradient {
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+}
+
+@utility animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+@utility animate-role-fade-in {
+  animation: role-fade-in 0.4s ease-out forwards;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-text-primary font-body antialiased selection:bg-white selection:text-black;
+    overflow-x: hidden;
+  }
+}
+
+.halftone {
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.atmosphere-glow-top {
+  background: #4E85BF;
+  filter: blur(120px);
+  opacity: 0.1;
+}
+
+.atmosphere-glow-bottom {
+  background: #89AACC;
+  filter: blur(120px);
+  opacity: 0.1;
+}
+
+.gradient-border-wrapper {
+  position: relative;
+  padding: 1px;
+  border-radius: inherit;
+}
+
+.gradient-border-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background-size: 200% 200%;
+}
